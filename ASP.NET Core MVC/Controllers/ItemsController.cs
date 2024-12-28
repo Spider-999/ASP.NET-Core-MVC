@@ -2,6 +2,7 @@
 using ASP.NET_Core_MVC.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ASP.NET_Core_MVC.Controllers
 {
@@ -23,13 +24,17 @@ namespace ASP.NET_Core_MVC.Controllers
         public async Task<IActionResult> Index()
         {
             // Wait until the task is performed
-            var item = await _context.Items.Include(s => s.SerialNumber).ToListAsync();
+            var item = await _context.Items.Include(s => s.SerialNumber)
+                                           .Include(c => c.Category)
+                                           .ToListAsync();
             // Return the view with the items from the database
             return View(item);
         }
 
         public IActionResult Create()
         {
+            // Search categories by id and name and add them to the view
+            ViewData["Categories"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
 
@@ -38,7 +43,7 @@ namespace ASP.NET_Core_MVC.Controllers
         /// Bind the item we get from the form to the item object.
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id","Name","Price")] Item item)
+        public async Task<IActionResult> Create([Bind("Id","Name","Price","CategoryId")] Item item)
         {
             // Check if the item we get is a valid item.
             if(ModelState.IsValid)
@@ -59,6 +64,8 @@ namespace ASP.NET_Core_MVC.Controllers
         /// </summary>
         public async Task<IActionResult> Edit(int id)
         {
+            // Search categories by id and name and add them to the view
+            ViewData["Categories"] = new SelectList(_context.Categories, "Id", "Name");
             // Find the item in the database
             var item = await _context.Items.FirstOrDefaultAsync(item => item.Id == id);
             // Return the view with the item
@@ -66,7 +73,7 @@ namespace ASP.NET_Core_MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id", "Name", "Price")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id", "Name", "Price", "CategoryId")] Item item)
         {
             // Check if the item we get is a valid item.
             if (ModelState.IsValid)

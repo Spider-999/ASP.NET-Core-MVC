@@ -3,13 +3,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index page</h2>
+<h2>Items showcase page</h2>
 <table class="table1">
     <thead>
         <tr>
             <th>Name</th>
             <th>Price</th>
             <th>Serial Number</th>
+            <th>Category</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
                 <td>@item.Name</td>
                 <td>@item.Price RON</td>
                 <td>@item.SerialNumber?.Name</td>
+                <td>@item.Category?.Name</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

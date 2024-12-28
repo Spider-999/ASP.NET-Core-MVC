@@ -1,4 +1,6 @@
-﻿namespace ASP.NET_Core_MVC.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ASP.NET_Core_MVC.Models
 {
     public class Item
     {
@@ -8,6 +10,8 @@
         private double _price;
         private int? _serialNumberId;
         private SerialNumber? _serialNumber;
+        private int? _categoryId;
+        private Category? _category;
         #endregion
 
         #region Getters and Setters
@@ -37,6 +41,20 @@
         {
             get => _serialNumber;
             set => _serialNumber = value;
+        }
+
+        public int? CategoryId
+        {
+            get => _categoryId;
+            set => _categoryId = value;
+        }
+
+        // Connect the Item with the Category using the CategoryId as a foreign key
+        [ForeignKey("CategoryId")]
+        public Category? Category
+        {
+            get => _category;
+            set => _category = value;
         }
         #endregion
     }

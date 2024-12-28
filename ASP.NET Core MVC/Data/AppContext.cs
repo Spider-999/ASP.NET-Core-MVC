@@ -8,6 +8,7 @@ namespace ASP.NET_Core_MVC.Data
         #region Private properties
         private DbSet<Item> _items { get; set; }
         private DbSet<SerialNumber> _serialNumbers { get; set; }
+        private DbSet<Category> _categories { get; set; }
         #endregion
 
         #region Constructor
@@ -25,6 +26,11 @@ namespace ASP.NET_Core_MVC.Data
                 (
                 new SerialNumber { Id = 10, Name = "1234Laptop56", ItemId = 4 }
                 );
+            modelBuilder.Entity<Category>().HasData
+                (
+                new Category { Id = 1, Name = "Electronics" },
+                new Category { Id = 2, Name = "Clothing" }
+                );
             base.OnModelCreating(modelBuilder);
         }
         #endregion
@@ -40,6 +46,12 @@ namespace ASP.NET_Core_MVC.Data
         {
             get => _serialNumbers;
             set => _serialNumbers = value;
+        }
+
+        public DbSet<Category> Categories
+        {
+            get => _categories;
+            set => _categories = value;
         }
         #endregion
     }
