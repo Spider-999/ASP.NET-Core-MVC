@@ -55,10 +55,8 @@ namespace ASP.NET_Core_MVC.Controllers
         }
 
         /// <summary>
-        /// Find an item in the database.
+        /// Find an item in the database to edit.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<IActionResult> Edit(int id)
         {
             // Find the item in the database
@@ -82,6 +80,38 @@ namespace ASP.NET_Core_MVC.Controllers
             }
             // Otherwise keep the user on the same page
             return View(item);
+        }
+
+
+        /// <summary>
+        /// Find an item in the database to delete.
+        /// </summary>
+        public async Task<IActionResult> Delete(int id)
+        {
+            // Find the item in the database
+            var item = await _context.Items.FirstOrDefaultAsync(item => item.Id == id);
+            // Return the view with the item
+            return View(item);
+        }
+
+        /// <summary>
+        /// Confirm the deletion of an item in the database.
+        /// Using ActionName map this function to the delete asp action in the delete.cshtml file.
+        /// </summary>
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            var item = await _context.Items.FindAsync(id);
+            if (item != null)
+            {
+                // Remove the item from the database
+                _context.Items.Remove(item);
+                // Save the changes to the database
+                await _context.SaveChangesAsync();
+                // Redirect the user to the index page after the item is deleted
+            }
+
+            return RedirectToAction(nameof(Index));
         }
         #endregion
     }
