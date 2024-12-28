@@ -56,6 +56,8 @@ namespace ASP.NET_Core_MVC.Models
             get => _category;
             set => _category = value;
         }
+
+        public List<ItemClient>? ItemClients { get; set; }
         #endregion
     }
 }

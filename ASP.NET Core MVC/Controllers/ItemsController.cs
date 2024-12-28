@@ -26,6 +26,8 @@ namespace ASP.NET_Core_MVC.Controllers
             // Wait until the task is performed
             var item = await _context.Items.Include(s => s.SerialNumber)
                                            .Include(c => c.Category)
+                                           .Include(ic => ic.ItemClients)
+                                           .ThenInclude(c => c.Client)
                                            .ToListAsync();
             // Return the view with the items from the database
             return View(item);

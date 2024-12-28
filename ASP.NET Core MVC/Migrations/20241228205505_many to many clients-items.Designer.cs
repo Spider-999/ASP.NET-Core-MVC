@@ -3,6 +3,7 @@ using ASP.NET_Core_MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using AppContext = ASP.NET_Core_MVC.Data.AppContext;
 
@@ -11,9 +12,11 @@ using AppContext = ASP.NET_Core_MVC.Data.AppContext;
 namespace ASP.NET_Core_MVC.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20241228205505_many to many clients-items")]
+    partial class Manytomanyclientsitems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

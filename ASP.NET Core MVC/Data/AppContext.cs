@@ -18,6 +18,11 @@ namespace ASP.NET_Core_MVC.Data
         #region Methods
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Set the primary key for the ItemClient table
+            modelBuilder.Entity<ItemClient>().HasKey(itemClient => new { itemClient.ItemId, itemClient.ClientId });
+            modelBuilder.Entity<ItemClient>().HasOne(itemClient => itemClient.Item).WithMany(item => item.ItemClients).HasForeignKey(itemClient => itemClient.ItemId);
+            modelBuilder.Entity<ItemClient>().HasOne(itemClient => itemClient.Client).WithMany(client => client.ItemClients).HasForeignKey(itemClient => itemClient.ClientId);
+
             modelBuilder.Entity<Item>().HasData
                 (
                 new Item { Id = 4, Name="Laptop", Price=1000, SerialNumberId=10 }
@@ -53,6 +58,8 @@ namespace ASP.NET_Core_MVC.Data
             get => _categories;
             set => _categories = value;
         }
+
+        public DbSet<ItemClient> ItemClients { get; set; }  
         #endregion
     }
 }
