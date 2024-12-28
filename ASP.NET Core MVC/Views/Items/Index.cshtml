@@ -1,0 +1,29 @@
+﻿@model List<ASP.NET_Core_MVC.Models.Item>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index page</h2>
+<table class="table1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price RON</td>
+                @*
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id">Update</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+                *@
+            </tr>
+        }
+    </tbody>
+</table>
