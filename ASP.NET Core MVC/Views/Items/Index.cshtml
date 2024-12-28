@@ -9,6 +9,7 @@
         <tr>
             <th>Name</th>
             <th>Price</th>
+            <th>Serial Number</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +18,7 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Price RON</td>
-                
+                <td>@item.SerialNumber?.Name</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

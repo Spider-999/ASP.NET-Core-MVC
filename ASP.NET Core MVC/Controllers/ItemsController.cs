@@ -23,7 +23,7 @@ namespace ASP.NET_Core_MVC.Controllers
         public async Task<IActionResult> Index()
         {
             // Wait until the task is performed
-            var item = await _context.Items.ToListAsync();
+            var item = await _context.Items.Include(s => s.SerialNumber).ToListAsync();
             // Return the view with the items from the database
             return View(item);
         }

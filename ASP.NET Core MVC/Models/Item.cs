@@ -6,6 +6,8 @@
         private int _id;
         private string _name;
         private double _price;
+        private int? _serialNumberId;
+        private SerialNumber? _serialNumber;
         #endregion
 
         #region Getters and Setters
@@ -23,6 +25,18 @@
         {
             get => _price;
             set => _price = value;
+        }
+
+        public int? SerialNumberId
+        {
+            get => _serialNumberId;
+            set => _serialNumberId = value;
+        }
+
+        public SerialNumber? SerialNumber
+        {
+            get => _serialNumber;
+            set => _serialNumber = value;
         }
         #endregion
     }
