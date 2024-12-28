@@ -1,12 +1,12 @@
 ﻿@model ASP.NET_Core_MVC.Models.Item
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>Create an item</h2>
+<h2>Edit an item</h2>
 
-<form asp-action="Create" method="post">
+<form asp-action="Edit" method="post">
     <div class="form-group">
         <label for="Name">Name</label>
         <input class="form-control" type="text" asp-for="Name" />
@@ -16,5 +16,5 @@
         <input class="form-control" type="number" asp-for="Price" />
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>
